@@ -1,5 +1,21 @@
+@font-face {
+    font-family: 'OpenDyslexic';
+    src: url('../font/OpenDyslexic-Regular.woff2') format('woff2'),
+         url('../font/OpenDyslexic-Regular.woff') format('woff'),
+         url('../font/OpenDyslexic-Regular.otf') format('opentype'),
+         url('../font/OpenDyslexic-Regular.eot') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --dyslexic-font: 'OpenDyslexic', Arial, sans-serif;
+}
+
 html {
-  font-size: 14px;
+    font-size: 14px;
+    font-family: var(--dyslexic-font);
 }
 
 @media (min-width: 768px) {
@@ -19,4 +35,12 @@ html {
 
 body {
   margin-bottom: 60px;
+  font-family: var(--dyslexic-font);
+}
+
+/* Renklendirilmiş metin için özel stil */
+.colored-text {
+    font-family: var(--dyslexic-font);
+    line-height: 1.6;
+    letter-spacing: 0.5px;
 }

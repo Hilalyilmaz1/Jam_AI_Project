@@ -4,54 +4,116 @@
     ViewData["Title"] = "WordMorph - Disleksi Yardımcısı";
     var hasOutput = !string.IsNullOrEmpty(Model.SimplifiedText);
 }
+<link rel="stylesheet" href="~/css/site.css" />
 <link rel="stylesheet" href="~/css/styles.css" />
 <script src="~/js/app.js"></script>
 
-
-<div class="container">
-
-    @if (!hasOutput)
-    {
-        <div id="inputSection" class="card input-card">
-            <h1>WordMorph</h1>
-            <div class="subtitle">Disleksi dostu metin dönüştürücü</div>
-
-            <form method="post">
-                <textarea name="UserInputText" placeholder="Metninizi buraya girin...">@Model.UserInputText</textarea>
-                <button type="submit">Dönüştür</button>
-            </form>
-        </div>
-    }
-    else
-    {       
-        <div id="outputSection" class="card output-card">
-            <h2>Sadeleştirilmiş Metin</h2>
-            <div class="output-text">@Html.Raw(Model.ColoredSimplifiedText)t</div>
-
-            <div class="image-preview">
-                <img src="@Model.ImageUrl" alt="İlgili görsel" />
+<div class="main-bg full-center">
+    <h1 class="main-title">WordMorph</h1>
+    <div class="center-content-top">
+        <form method="post" class="search-bar-form large-bar textarea-bar">
+            <div class="search-bar large-bar textarea-bar">
+                <textarea name="UserInputText" placeholder="Metninizi buraya girin..." rows="6" maxlength="2000">@Model.UserInputText</textarea>
+                <button type="submit" class="search-btn" aria-label="Dönüştür">
+                    <!-- Magic wand icon -->
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 20L20 4M15 4H20V9M9 15L4 20M17 17V17.01M21 21V21.01M21 17V17.01M17 21V21.01M12 8V8.01M8 12V12.01" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+                </button>
             </div>
-
-            <div class="actions">
+        </form>
+        <div class="search-desc">Disleksi dostu metin dönüştürücü</div>
+    </div>
+    @if (hasOutput)
+    {
+        <div class="output-center">
+            <h2 class="output-title">Sadeleştirilmiş Metin</h2>
+            <div class="actions actions-top">
                 <audio controls>
                     <source src="@Model.AudioUrl" type="audio/mpeg" />
                     Tarayıcınız ses dosyasını desteklemiyor.
                 </audio>
-                <button onclick="goBack()">↩️ Geri Dön</button>
+                <button id="resetBtn" type="button" class="reset-btn">Sıfırla</button>
+            </div>
+            <div class="output-text colored-text" id="outputText">@Html.Raw(Model.ColoredSimplifiedText)</div>
+            <button id="searchSelectedBtn" class="search-selected-btn" disabled>Görsel Ara</button>
+            <div class="word-image-preview">
+                <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Görsel yükleniyor...</p>
+                </div>
+                <div id="imageContainer"></div>
             </div>
         </div>
     }
-
+    <div id="toast" class="toast">Dönüştürülüyor!</div>
 </div>
 
-<script>
+@if (!hasOutput)
+{
+    <div id="inputSection" class="card input-card">
+    </div>
+}
 
-    @* function speakText() {
-        const msg = new SpeechSynthesisUtterance(text);
-        msg.lang = "tr-TR";
-        window.speechSynthesis.speak(msg);
-    } *@
-    function goBack() {
-        window.location.href = "/";
+<script>
+    // Toast gösterme fonksiyonu
+    function showToast(msg) {
+        const toast = document.getElementById('toast');
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
     }
+
+    // Sıfırla butonu
+    document.addEventListener('DOMContentLoaded', function() {
+        const resetBtn = document.getElementById('resetBtn');
+        if (resetBtn) {
+            resetBtn.onclick = function() {
+                window.location.href = '/';
+            };
+        }
+
+        // Dönüştürme butonuna basınca toast göster
+        const form = document.querySelector('.search-bar-form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                setTimeout(() => showToast('Dönüştürülüyor!'), 100); // Kısa gecikme ile göster
+            });
+        }
+
+        // Seçili metinle görsel arama
+        const outputText = document.getElementById('outputText');
+        const searchSelectedBtn = document.getElementById('searchSelectedBtn');
+        if (outputText && searchSelectedBtn) {
+            outputText.addEventListener('mouseup', function() {
+                const selection = window.getSelection();
+                const selectedText = selection && selection.toString().trim();
+                searchSelectedBtn.disabled = !selectedText;
+            });
+            searchSelectedBtn.addEventListener('click', async function() {
+                const selection = window.getSelection();
+                const selectedText = selection && selection.toString().trim();
+                const imageContainer = document.getElementById('imageContainer');
+                const loading = document.getElementById('loadingIndicator');
+                if (!selectedText) return;
+                if (loading) loading.style.display = 'flex';
+                if (imageContainer) imageContainer.innerHTML = '';
+                try {
+                    const resp = await fetch('/api/generate-image', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ text: selectedText })
+                    });
+                    const data = await resp.json();
+                    if (data.image_url) {
+                        imageContainer.innerHTML = `<img src="${data.image_url}" alt="${selectedText}" />`;
+                    } else {
+                        imageContainer.innerHTML = '<p>Görsel bulunamadı.</p>';
+                    }
+                } catch (err) {
+                    imageContainer.innerHTML = '<p>Bir hata oluştu.</p>';
+                } finally {
+                    if (loading) loading.style.display = 'none';
+                }
+            });
+        }
+    });
 </script>

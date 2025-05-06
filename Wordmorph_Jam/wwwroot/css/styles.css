@@ -1,145 +1,449 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+@font-face {
+    font-family: 'OpenDyslexic';
+    src: url('../font/OpenDyslexic-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --primary-color: #6C47FF;
+    --primary-hover: #4F46E5;
+    --text-primary: #232946;
+    --text-secondary: #6B7280;
+    --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    --search-bg: #fff;
+    --search-shadow: 0 8px 32px 0 rgba(76, 68, 182, 0.10);
+    --radius-xl: 2.5rem;
+    --radius-md: 1.2rem;
+}
+
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    font-family: 'Inter', sans-serif;
+    font-family: 'OpenDyslexic', Arial, sans-serif;
+    color: var(--text-primary);
+    background: var(--bg-gradient);
+    min-height: 100vh;
 }
 
 body {
-    margin: 0;
-    padding: 0;
     min-height: 100vh;
-    background-image: url('/images/bg2.jpg');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed; 
+    width: 100vw;
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-family: 'Inter', sans-serif;
+    justify-content: center;
 }
 
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
+.main-bg {
     width: 100vw;
     height: 100vh;
-    background-image: url('/images/bg2.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: -1;
-    opacity: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background: var(--bg-gradient);
 }
 
-h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #333;
-    text-align: center;
+.main-bg.full-center {
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-gradient);
 }
 
-.subtitle {
-    font-size: 1rem;
-    color: #666;
-    text-align: center;
-    margin-bottom: 2rem;
+.center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
 }
 
-textarea {
+.center-content-top {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.search-bar-form {
     width: 100%;
-    min-height: 150px;
-    padding: 1rem;
-    border: none;
-    border-radius: 16px;
-    background: #f4f6fb;
-    font-size: 1.1rem;
-    outline: none;
-    resize: vertical;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.search-bar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: var(--search-bg);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--search-shadow);
+    padding: 0.3rem 0.5rem 0.3rem 1.2rem;
     transition: box-shadow 0.2s;
 }
 
-textarea:focus {
-    box-shadow: 0 0 0 3px rgba(78, 115, 223, 0.2);
+.search-bar:focus-within {
+    box-shadow: 0 8px 32px 0 rgba(108, 71, 255, 0.18);
 }
 
-button {
-    margin-top: 1rem;
-    background-color: #5e72e4;
-    color: white;
+.search-bar input[type="text"] {
+    flex: 1;
     border: none;
-    padding: 0.8rem 2rem;
-    border-radius: 16px;
-    font-size: 1rem;
+    outline: none;
+    background: transparent;
+    font-size: 1.35rem;
+    font-family: 'OpenDyslexic', Arial, sans-serif;
+    padding: 1.1rem 0.8rem 1.1rem 0;
+    color: var(--text-primary);
+    border-radius: var(--radius-xl) 0 0 var(--radius-xl);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+
+.search-bar input[type="text"]::placeholder {
+    color: #b0b3c6;
+    opacity: 1;
+    font-size: 1.15rem;
+    font-family: 'OpenDyslexic', Arial, sans-serif;
+}
+
+.search-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    border: none;
+    border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+    padding: 0.7rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px 0 rgba(108, 71, 255, 0.10);
 }
 
-button:hover {
-    background-color: #324cdd;
+.search-btn:hover {
+    background: linear-gradient(135deg, var(--primary-hover), var(--primary-color));
 }
 
-.hidden {
-    display: none;
+.search-btn svg {
+    display: block;
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem;
-    margin: 0 auto;
-    max-width: 1000px;
-}
-
-.card {
-    background-color: #fff;
-    border-radius: 1rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
-    margin-top: 2rem;
-    width: 100%;
-    transition: all 0.3s ease;
-}
-
-.input-card textarea {
-    width: 100%;
-    height: 200px;
-    padding: 1rem;
+.search-desc {
+    margin-top: 0.5rem;
     font-size: 1.1rem;
-    resize: vertical;
-    margin-bottom: 1rem;
+    color: var(--text-secondary);
+    text-align: center;
+    font-family: 'OpenDyslexic', Arial, sans-serif;
+    letter-spacing: 0.2px;
 }
 
-.output-card {
-    width: 80vw;
-    margin-top: 10rem;
-    min-height: 80vh;
+.search-bar-form.large-bar {
+    width: 100%;
+    max-width: 800px;
+}
+
+.search-bar.large-bar {
+    width: 100%;
+    min-height: 70px;
+    border-radius: 2.5rem;
+    box-shadow: 0 8px 32px 0 rgba(76, 68, 182, 0.10);
+    padding: 0.3rem 0.5rem 0.3rem 2rem;
+}
+
+.search-bar.large-bar input[type="text"] {
+    font-size: 2rem;
+    padding: 1.5rem 1rem 1.5rem 0;
+    border-radius: 2.5rem 0 0 2.5rem;
+}
+
+.search-bar.large-bar input[type="text"]::placeholder {
+    font-size: 1.3rem;
+}
+
+.search-bar.large-bar .search-btn {
+    padding: 0.9rem 2.2rem;
+    border-radius: 0 2.5rem 2.5rem 0;
+}
+
+.search-bar.large-bar .search-btn svg {
+    width: 2.2rem;
+    height: 2.2rem;
+}
+
+.search-desc {
+    margin-top: 1.2rem;
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    text-align: center;
+    font-family: 'OpenDyslexic', Arial, sans-serif;
+    letter-spacing: 0.2px;
+}
+
+.output-center {
+    width: 100vw;
     display: flex;
     flex-direction: column;
-    justify-content: start;
     align-items: center;
+    justify-content: flex-start;
+    margin-top: 4vh;
+}
+
+.output-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 1.2rem;
+    font-family: 'OpenDyslexic', Arial, sans-serif;
+    letter-spacing: 0.5px;
     text-align: center;
-    padding-top: 3rem;
 }
 
 .output-text {
-    font-size: 1.3rem;
-    padding: 2rem;
+    font-size: 1.2rem;
+    padding: 1.5rem 2rem;
     white-space: pre-wrap;
-    text-align: justify;
-    line-height: 1.6;
+    text-align: center;
+    line-height: 1.8;
     width: 100%;
-    background-color: #f9f9f9;
-    border-radius: 0.5rem;
+    max-width: 900px;
+    background-color: var(--search-bg);
+    border-radius: 1.2rem;
+    border: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'OpenDyslexic', Arial, sans-serif;
 }
 
-.actions {
-    margin-top: 2rem;
+.search-bar-form.large-bar.textarea-bar {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.search-bar.large-bar.textarea-bar {
+    width: 100%;
+    min-height: 180px;
+    border-radius: 2.5rem;
+    box-shadow: 0 8px 32px 0 rgba(76, 68, 182, 0.10);
+    padding: 0.3rem 0.5rem 0.3rem 2rem;
     display: flex;
+    align-items: stretch;
+    background: var(--search-bg);
+}
+
+.search-bar.large-bar.textarea-bar textarea {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1.05rem;
+    font-family: 'OpenDyslexic', Arial, sans-serif;
+    padding: 0.7rem 0.7rem 0.7rem 1.2rem;
+    color: var(--text-primary);
+    border-radius: 2.5rem 0 0 2.5rem;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+    resize: vertical;
+    min-width: 0;
+    min-height: 120px;
+    max-height: 500px;
+    height: 100%;
+    line-height: 1.25;
+    box-sizing: border-box;
+    overflow-y: auto;
+    word-break: break-word;
+}
+
+.search-bar.large-bar.textarea-bar textarea::placeholder {
+    color: #b0b3c6;
+    opacity: 1;
+    font-size: 1.15rem;
+    font-family: 'OpenDyslexic', Arial, sans-serif;
+}
+
+.search-bar.large-bar.textarea-bar .search-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    border: none;
+    border-radius: 0 2.5rem 2.5rem 0;
+    padding: 0 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px 0 rgba(108, 71, 255, 0.10);
+    min-width: 70px;
+    min-height: 100%;
+}
+
+.search-bar.large-bar.textarea-bar .search-btn svg {
+    width: 2.2rem;
+    height: 2.2rem;
+}
+
+@media (max-width: 1200px) {
+    .search-bar-form.large-bar.textarea-bar {
+        max-width: 98vw;
+    }
+    .search-bar.large-bar.textarea-bar textarea {
+        font-size: 0.95rem;
+        padding: 0.5rem 0.2rem 0.5rem 0;
+        min-height: 80px;
+        max-height: 300px;
+    }
+    .search-bar.large-bar.textarea-bar .search-btn {
+        padding: 0 1.2rem;
+    }
+}
+@media (max-width: 700px) {
+    .search-bar-form.large-bar.textarea-bar {
+        max-width: 99vw;
+    }
+    .search-bar.large-bar.textarea-bar {
+        min-height: 100px;
+        padding: 0.1rem 0.1rem 0.1rem 0.5rem;
+    }
+    .search-bar.large-bar.textarea-bar textarea {
+        font-size: 0.95rem;
+        padding: 0.7rem 0.2rem 0.7rem 0;
+        min-height: 60px;
+        max-height: 180px;
+    }
+    .search-bar.large-bar.textarea-bar .search-btn {
+        padding: 0 0.7rem;
+        min-width: 40px;
+    }
+}
+
+@media (max-width: 900px) {
+    .search-bar-form.large-bar {
+        max-width: 98vw;
+    }
+    .search-bar.large-bar input[type="text"] {
+        font-size: 1.2rem;
+        padding: 1rem 0.5rem 1rem 0;
+    }
+    .search-bar.large-bar .search-btn {
+        padding: 0.7rem 1.2rem;
+    }
+    .output-text {
+        font-size: 1rem;
+        padding: 1rem 0.5rem;
+    }
+}
+
+.reset-btn {
+    background: #fff;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 1.2rem;
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+    font-family: 'OpenDyslexic', Arial, sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 1rem;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.reset-btn:hover {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+.toast {
+    visibility: hidden;
+    min-width: 200px;
+    background: #232946;
+    color: #fff;
+    text-align: center;
+    border-radius: 1.2rem;
+    padding: 1rem 2rem;
+    position: fixed;
+    z-index: 9999;
+    left: 50%;
+    bottom: 3rem;
+    transform: translateX(-50%);
+    font-size: 1.1rem;
+    font-family: 'OpenDyslexic', Arial, sans-serif;
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+    box-shadow: 0 4px 16px 0 rgba(76, 68, 182, 0.10);
+}
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+#imageContainer {
+    width: 100%;
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     gap: 1rem;
 }
+#imageContainer img {
+    max-width: 320px;
+    max-height: 220px;
+    border-radius: 1.2rem;
+    box-shadow: 0 2px 8px 0 rgba(76, 68, 182, 0.10);
+}
+
+.search-selected-btn {
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 1.2rem;
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+    font-family: 'OpenDyslexic', Arial, sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 1rem 0 0.5rem 0;
+    transition: background 0.2s, color 0.2s, opacity 0.2s;
+    opacity: 0.7;
+}
+.search-selected-btn:enabled {
+    opacity: 1;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+}
+.search-selected-btn:disabled {
+    cursor: not-allowed;
+    background: #bbb;
+    color: #eee;
+    opacity: 0.5;
+}
+
+.main-title {
+    font-size: 2.7rem;
+    font-family: 'OpenDyslexic', Arial, sans-serif;
+    color: var(--primary-color);
+    text-align: center;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+@media (max-width: 700px) {
+    .main-title {
+        font-size: 1.5rem;
+        margin-top: 1.2rem;
+        margin-bottom: 0.7rem;
+    }
+}
+

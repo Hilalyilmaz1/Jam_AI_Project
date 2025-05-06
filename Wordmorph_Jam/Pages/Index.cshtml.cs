@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Text;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Wordmorph_Jam.Pages
 {
@@ -19,7 +20,12 @@ namespace Wordmorph_Jam.Pages
 
         public void OnGet()
         {
-            // Ýlk sayfa yüklenirken yapýlacak þeyler varsa buraya
+            // Sayfa yenilendiÄŸinde tÃ¼m deÄŸerleri sÄ±fÄ±rla
+            UserInputText = null;
+            ColoredSimplifiedText = null;
+            SimplifiedText = null;
+            ImageUrl = null;
+            AudioUrl = null;
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -33,7 +39,7 @@ namespace Wordmorph_Jam.Pages
                 JsonConvert.SerializeObject(new { text = UserInputText }),
                 Encoding.UTF8, "application/json");
 
-            // 1. Metni sadeleþtir
+            // 1. Metni sadeleÅŸtir
             var simplifyResponse = await client.PostAsync("http://localhost:8000/simplify", jsonContent);
             if (!simplifyResponse.IsSuccessStatusCode)
                 return Page();
@@ -41,23 +47,14 @@ namespace Wordmorph_Jam.Pages
             var simplifyResult = JsonConvert.DeserializeObject<dynamic>(await simplifyResponse.Content.ReadAsStringAsync());
             SimplifiedText = simplifyResult.simplified_text;
 
-            // 2. Renklendir ve ayýr
+            // 2. Renklendir ve ayÄ±r
             ColoredSimplifiedText = RenklendirVeAyir(SimplifiedText);
 
-            // 3. Görseli sadeleþtirilmiþ metne göre al
-            var simplifiedJson = new StringContent(
+            // 3. TTS - sadeleÅŸtirilmiÅŸ metni sesli oku
+            var ttsJson = new StringContent(
                 JsonConvert.SerializeObject(new { text = SimplifiedText }),
                 Encoding.UTF8, "application/json");
-
-            var imageResponse = await client.PostAsync("http://localhost:8000/generate-image", simplifiedJson);
-            if (imageResponse.IsSuccessStatusCode)
-            {
-                var imageResult = JsonConvert.DeserializeObject<dynamic>(await imageResponse.Content.ReadAsStringAsync());
-                ImageUrl = imageResult.image_url;
-            }
-
-            // 4. TTS - sadeleþtirilmiþ metni sesli oku
-            var ttsResponse = await client.PostAsync("http://localhost:8000/tts", simplifiedJson);
+            var ttsResponse = await client.PostAsync("http://localhost:8000/tts", ttsJson);
             if (ttsResponse.IsSuccessStatusCode)
             {
                 var ttsResult = JsonConvert.DeserializeObject<dynamic>(await ttsResponse.Content.ReadAsStringAsync());
@@ -69,23 +66,36 @@ namespace Wordmorph_Jam.Pages
 
         public string RenklendirVeAyir(string input)
         {
-            var sesliHarfler = new HashSet<char> { 'a', 'e', 'ý', 'i', 'o', 'ö', 'u', 'ü',
-                                           'A', 'E', 'I', 'Ý', 'O', 'Ö', 'U', 'Ü' };
+            var sesliHarfler = new HashSet<char> { 'a', 'e', 'Ä±', 'i', 'o', 'Ã¶', 'u', 'Ã¼',
+                                           'A', 'E', 'I', 'Ä°', 'O', 'Ã–', 'U', 'Ãœ' };
 
-            var renkler = new[] { "#FF6B6B", "#6BCB77", "#4D96FF", "#FFD93D", "#845EC2", "#00C9A7" };
+            var renkler = new[] { 
+                "#000000", // Siyah
+                "#0000FF", // Mavi
+                "#006400", // Koyu YeÅŸil
+                "#8B0000", // Koyu KÄ±rmÄ±zÄ±
+                "#4B0082", // Ä°ndigo
+                "#800080"  // Mor
+            };
             int renkIndex = 0;
 
             var builder = new StringBuilder();
             var parca = new StringBuilder();
+            var kelime = new StringBuilder();
 
             foreach (char c in input)
             {
                 parca.Append(c);
+                kelime.Append(c);
+
                 if (sesliHarfler.Contains(c))
                 {
                     var renk = renkler[renkIndex % renkler.Length];
-                    builder.Append($"<span style='color:{renk}; font-weight:bold;'>{parca}</span> ");
+                    var kelimeStr = kelime.ToString().Trim();
+                    
+                    builder.Append($"<span class='colored-word' style='color:{renk}; font-weight:bold;' data-word='{kelimeStr}'>{parca}</span>");
                     parca.Clear();
+                    kelime.Clear();
                     renkIndex++;
                 }
             }
@@ -93,7 +103,9 @@ namespace Wordmorph_Jam.Pages
             if (parca.Length > 0)
             {
                 var renk = renkler[renkIndex % renkler.Length];
-                builder.Append($"<span style='color:{renk}; font-weight:bold;'>{parca}</span>");
+                var kelimeStr = kelime.ToString().Trim();
+                
+                builder.Append($"<span class='colored-word' style='color:{renk}; font-weight:bold;' data-word='{kelimeStr}'>{parca}</span>");
             }
 
             return builder.ToString();

@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "pYSX5XthLlY=",
+  "dgSpecHash": "sUFe9qFrHI8p3c6B/8a4zh4Z93jVfBkws6rWOexmN5Gz0VaO5Y/taNVd6tRnSll4RvRy0SH4bVdphzY/wIsE9g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\humey\\source\\repos\\Jam_AI_Project\\Wordmorph_Jam\\Wordmorph_Jam.csproj",
+  "projectFilePath": "/Users/hawkyshun/Projects/Jam_AI_Project/Wordmorph_Jam/Wordmorph_Jam.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\humey\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+    "/Users/hawkyshun/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []
 }
