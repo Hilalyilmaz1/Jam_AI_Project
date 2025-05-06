@@ -9,7 +9,10 @@
 <script src="~/js/app.js"></script>
 
 <div class="main-bg full-center">
-    <h1 class="main-title">WordMorph</h1>
+    @if (!hasOutput)
+{
+    <h1 class="main-title">WordMorph'a Hoşgeldiniz !</h1>
+
     <div class="center-content-top">
         <form method="post" class="search-bar-form large-bar textarea-bar">
             <div class="search-bar large-bar textarea-bar">
@@ -20,12 +23,13 @@
                 </button>
             </div>
         </form>
-        <div class="search-desc">Disleksi dostu metin dönüştürücü</div>
+        <div class="search-desc">Disleksi dostu metin dönüştürücünüz </div>
     </div>
+}    
     @if (hasOutput)
     {
         <div class="output-center">
-            <h2 class="output-title">Sadeleştirilmiş Metin</h2>
+            <h2 class="output-title">Dönüştürülmüş Metin</h2>
             <div class="actions actions-top">
                 <audio controls>
                     <source src="@Model.AudioUrl" type="audio/mpeg" />

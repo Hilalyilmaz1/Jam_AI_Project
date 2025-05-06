@@ -1,10 +1,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using System.Text;
-using System.Net.Http;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 
 namespace Wordmorph_Jam.Pages
 {
