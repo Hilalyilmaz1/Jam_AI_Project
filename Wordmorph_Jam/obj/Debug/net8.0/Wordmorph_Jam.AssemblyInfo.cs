@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Wordmorph_Jam")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2d0a6a4b5776ab6ca062b1e7df24a0c29834f5c6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7b0b8865d75ec969d03d6639a5d98f5688a1efe3")]
 [assembly: System.Reflection.AssemblyProductAttribute("Wordmorph_Jam")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Wordmorph_Jam")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

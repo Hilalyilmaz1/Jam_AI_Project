@@ -97,25 +97,92 @@
                 const selectedText = selection && selection.toString().trim();
                 const imageContainer = document.getElementById('imageContainer');
                 const loading = document.getElementById('loadingIndicator');
+                
                 if (!selectedText) return;
-                if (loading) loading.style.display = 'flex';
-                if (imageContainer) imageContainer.innerHTML = '';
+                
+                // Container'ı temizle ve loading'i göster
+                if (imageContainer) {
+                    imageContainer.innerHTML = '';
+                    imageContainer.style.display = 'flex';
+                }
+                if (loading) {
+                    loading.style.display = 'flex';
+                }
+                
                 try {
-                    const resp = await fetch('/api/generate-image', {
+                    console.log('Seçili metin:', selectedText);
+                    
+                    const resp = await fetch('http://localhost:8000/generate-image', {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
                         body: JSON.stringify({ text: selectedText })
                     });
+                    
+                    if (!resp.ok) {
+                        throw new Error('Görsel arama başarısız oldu');
+                    }
+                    
                     const data = await resp.json();
-                    if (data.image_url) {
-                        imageContainer.innerHTML = `<img src="${data.image_url}" alt="${selectedText}" />`;
+                    console.log('API yanıtı (ham):', data);
+                    
+                    // API yanıtını kontrol et
+                    if (data && data.image_url && typeof data.image_url === 'string') {
+                        const imageUrl = data.image_url;
+                        console.log('Görsel URL (işlenmiş):', imageUrl);
+                        
+                        if (!imageUrl || imageUrl.includes('placeholder.com')) {
+                            throw new Error('Geçerli bir görsel bulunamadı');
+                        }
+                        
+                        // Önce container'ı hazırla
+                        const wrapper = document.createElement('div');
+                        wrapper.className = 'image-wrapper';
+                        
+                        // Görseli oluştur
+                        const img = document.createElement('img');
+                        img.src = imageUrl;
+                        img.alt = selectedText;
+                        img.title = selectedText;
+                        img.loading = 'lazy';
+                        
+                        // Yükleme başarılı olduğunda
+                        img.onload = function() {
+                            console.log('Görsel başarıyla yüklendi:', imageUrl);
+                            wrapper.classList.add('loaded');
+                            if (loading) loading.style.display = 'none';
+                        };
+                        
+                        // Yükleme hatası olduğunda
+                        img.onerror = function() {
+                            console.error('Görsel yüklenemedi:', imageUrl);
+                            wrapper.innerHTML = '<p>Görsel yüklenemedi.</p>';
+                            if (loading) loading.style.display = 'none';
+                        };
+                        
+                        // Görseli wrapper'a ekle
+                        wrapper.appendChild(img);
+                        
+                        // Container'ı güncelle
+                        if (imageContainer) {
+                            imageContainer.innerHTML = '';
+                            imageContainer.appendChild(wrapper);
+                        }
                     } else {
-                        imageContainer.innerHTML = '<p>Görsel bulunamadı.</p>';
+                        console.log('Geçersiz API yanıtı:', data);
+                        if (loading) loading.style.display = 'none';
+                        if (imageContainer) {
+                            imageContainer.innerHTML = '<p>Görsel bulunamadı.</p>';
+                        }
                     }
                 } catch (err) {
-                    imageContainer.innerHTML = '<p>Bir hata oluştu.</p>';
-                } finally {
+                    console.error('Görsel arama hatası:', err);
                     if (loading) loading.style.display = 'none';
+                    if (imageContainer) {
+                        imageContainer.innerHTML = '<p>Bir hata oluştu. Lütfen tekrar deneyin.</p>';
+                    }
                 }
             });
         }
