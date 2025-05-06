@@ -1,10 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "pYSX5XthLlY=",
+  "dgSpecHash": "cbFKFUDJdPQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\humey\\source\\repos\\Jam_AI_Project\\Wordmorph_Jam\\Wordmorph_Jam.csproj",
+  "projectFilePath": "D:\\Jam_AI_Project\\Wordmorph_Jam\\Wordmorph_Jam.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\humey\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+    "C:\\Users\\berke\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\berke\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.15\\microsoft.netcore.app.ref.8.0.15.nupkg.sha512",
+    "C:\\Users\\berke\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.15\\microsoft.windowsdesktop.app.ref.8.0.15.nupkg.sha512",
+    "C:\\Users\\berke\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.15\\microsoft.aspnetcore.app.ref.8.0.15.nupkg.sha512",
+    "C:\\Users\\berke\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.15\\microsoft.netcore.app.host.win-x64.8.0.15.nupkg.sha512"
   ],
   "logs": []
 }

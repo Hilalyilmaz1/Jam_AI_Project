@@ -5,10 +5,19 @@ from gemini_simplifield import simplify_text_with_gemini
 from image_generator import get_image_url
 from tts_synthesizer import synthesize_text
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Dilersen sadece http://localhost:xxxx şeklinde kısıtlayabilirsin
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 class TextInput(BaseModel):
     text: str

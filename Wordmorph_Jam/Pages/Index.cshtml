@@ -10,6 +10,23 @@
 
 <div class="container">
 
+    @if (!string.IsNullOrEmpty(Model.ColoredSimplifiedText))
+{
+    <div>
+        <h3>Sadeleştirilmiş Renkli Metin</h3>
+        <div style="font-size: 1.2em;" 
+             @Html.Raw(Model.ColoredSimplifiedText)>
+        </div>
+
+        <h3>Sesli Okuma</h3>
+        <audio controls src="@Model.AudioUrl"></audio>
+
+        <h3>Görsel</h3>
+        <img src="@Model.ImageUrl" style="max-width: 300px;" />
+    </div>
+}
+
+
     @if (!hasOutput)
     {
         <div id="inputSection" class="card input-card">

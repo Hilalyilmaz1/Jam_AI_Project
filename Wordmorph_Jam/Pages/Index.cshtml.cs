@@ -19,7 +19,7 @@ namespace Wordmorph_Jam.Pages
 
         public void OnGet()
         {
-            // Ýlk sayfa yüklenirken yapýlacak þeyler varsa buraya
+            // ï¿½lk sayfa yï¿½klenirken yapï¿½lacak ï¿½eyler varsa buraya
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -33,31 +33,32 @@ namespace Wordmorph_Jam.Pages
                 JsonConvert.SerializeObject(new { text = UserInputText }),
                 Encoding.UTF8, "application/json");
 
-            // 1. Metni sadeleþtir
-            var simplifyResponse = await client.PostAsync("http://localhost:8000/simplify", jsonContent);
+            // 1. Metni sadeleï¿½tir
+            var simplifyResponse = await client.PostAsync("http://127.0.0.1:8000/simplify", jsonContent);
+
             if (!simplifyResponse.IsSuccessStatusCode)
                 return Page();
 
             var simplifyResult = JsonConvert.DeserializeObject<dynamic>(await simplifyResponse.Content.ReadAsStringAsync());
-            SimplifiedText = simplifyResult.simplified_text;
+            SimplifiedText = simplifyResult?.simplified_text ?? string.Empty;
 
-            // 2. Renklendir ve ayýr
+            // 2. Renklendir ve ayï¿½r
             ColoredSimplifiedText = RenklendirVeAyir(SimplifiedText);
 
-            // 3. Görseli sadeleþtirilmiþ metne göre al
+            // 3. Gï¿½rseli sadeleï¿½tirilmiï¿½ metne gï¿½re al
             var simplifiedJson = new StringContent(
                 JsonConvert.SerializeObject(new { text = SimplifiedText }),
                 Encoding.UTF8, "application/json");
 
-            var imageResponse = await client.PostAsync("http://localhost:8000/generate-image", simplifiedJson);
+            var imageResponse = await client.PostAsync("http://127.0.0.1:8000/generate-image", simplifiedJson);
             if (imageResponse.IsSuccessStatusCode)
             {
                 var imageResult = JsonConvert.DeserializeObject<dynamic>(await imageResponse.Content.ReadAsStringAsync());
                 ImageUrl = imageResult.image_url;
             }
 
-            // 4. TTS - sadeleþtirilmiþ metni sesli oku
-            var ttsResponse = await client.PostAsync("http://localhost:8000/tts", simplifiedJson);
+            // 4. TTS - sadeleï¿½tirilmiï¿½ metni sesli oku
+            var ttsResponse = await client.PostAsync("http://127.0.0.1:8000/tts", simplifiedJson);
             if (ttsResponse.IsSuccessStatusCode)
             {
                 var ttsResult = JsonConvert.DeserializeObject<dynamic>(await ttsResponse.Content.ReadAsStringAsync());
@@ -69,8 +70,8 @@ namespace Wordmorph_Jam.Pages
 
         public string RenklendirVeAyir(string input)
         {
-            var sesliHarfler = new HashSet<char> { 'a', 'e', 'ý', 'i', 'o', 'ö', 'u', 'ü',
-                                           'A', 'E', 'I', 'Ý', 'O', 'Ö', 'U', 'Ü' };
+            var sesliHarfler = new HashSet<char> { 'a', 'e', 'ï¿½', 'i', 'o', 'ï¿½', 'u', 'ï¿½',
+                                           'A', 'E', 'I', 'ï¿½', 'O', 'ï¿½', 'U', 'ï¿½' };
 
             var renkler = new[] { "#FF6B6B", "#6BCB77", "#4D96FF", "#FFD93D", "#845EC2", "#00C9A7" };
             int renkIndex = 0;

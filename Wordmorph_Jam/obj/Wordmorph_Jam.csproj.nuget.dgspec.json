@@ -1,32 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\humey\\source\\repos\\Jam_AI_Project\\Wordmorph_Jam\\Wordmorph_Jam.csproj": {}
+    "D:\\Jam_AI_Project\\Wordmorph_Jam\\Wordmorph_Jam.csproj": {}
   },
   "projects": {
-    "C:\\Users\\humey\\source\\repos\\Jam_AI_Project\\Wordmorph_Jam\\Wordmorph_Jam.csproj": {
+    "D:\\Jam_AI_Project\\Wordmorph_Jam\\Wordmorph_Jam.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\humey\\source\\repos\\Jam_AI_Project\\Wordmorph_Jam\\Wordmorph_Jam.csproj",
+        "projectUniqueName": "D:\\Jam_AI_Project\\Wordmorph_Jam\\Wordmorph_Jam.csproj",
         "projectName": "Wordmorph_Jam",
-        "projectPath": "C:\\Users\\humey\\source\\repos\\Jam_AI_Project\\Wordmorph_Jam\\Wordmorph_Jam.csproj",
-        "packagesPath": "C:\\Users\\humey\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\humey\\source\\repos\\Jam_AI_Project\\Wordmorph_Jam\\obj\\",
+        "projectPath": "D:\\Jam_AI_Project\\Wordmorph_Jam\\Wordmorph_Jam.csproj",
+        "packagesPath": "C:\\Users\\berke\\.nuget\\packages\\",
+        "outputPath": "D:\\Jam_AI_Project\\Wordmorph_Jam\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\humey\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\berke\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -67,6 +60,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.15, 8.0.15]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[8.0.15, 8.0.15]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.15, 8.0.15]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.15, 8.0.15]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
