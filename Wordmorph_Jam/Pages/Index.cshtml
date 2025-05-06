@@ -1,0 +1,53 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "WordMorph - Disleksi Yardımcısı";
+    var hasOutput = !string.IsNullOrEmpty(Model.ProcessedText);
+}
+<link rel="stylesheet" href="~/css/styles.css" />
+<script src="~/js/app.js"></script>
+
+
+<div class="container">
+
+    @if (!hasOutput)
+    {
+        <!-- INPUT SECTION -->
+        <div id="inputSection" class="card input-card">
+            <h1>WordMorph</h1>
+            <div class="subtitle">Disleksi dostu metin dönüştürücü</div>
+
+            <form method="post">
+                <textarea name="UserInputText" placeholder="Metninizi buraya girin...">@Model.UserInputText</textarea>
+                <button type="submit">Dönüştür</button>
+            </form>
+        </div>
+    }
+    else
+    {
+        <!-- OUTPUT SECTION -->
+        <div id="outputSection" class="card output-card">
+            <h2>Dönüştürülmüş Metin</h2>
+            <div class="output-text">
+                @Html.Raw(Model.ProcessedText.Replace("\n", " "))
+            </div>
+            <div class="actions">
+                <button onclick="speakText(`@Model.ProcessedText`)">🔊 Sesli Oku</button>
+                <button onclick="goBack()">↩️ Geri Dön</button>
+            </div>
+        </div>
+    }
+
+</div>
+
+<script>
+
+    function speakText() {
+        const msg = new SpeechSynthesisUtterance(text);
+        msg.lang = "tr-TR";
+        window.speechSynthesis.speak(msg);
+    }
+    function goBack() {
+        window.location.href = "/";
+    }
+</script>
