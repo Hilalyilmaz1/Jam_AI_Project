@@ -5,10 +5,10 @@ import requests
 
 load_dotenv()
 
-# API anahtarını buraya yaz
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
-# Gemini Pro modelini yükle
+genai.configure(api_key=GOOGLE_API_KEY)
+
 model = genai.GenerativeModel("gemini-1.5-pro")
 
 def simplify_text_with_gemini(text: str) -> str:

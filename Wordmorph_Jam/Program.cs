@@ -1,11 +1,10 @@
-using Wordmorph_Jam.Services;
+using Microsoft.Extensions.FileProviders;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddSingleton<GeminiService>();
 
 
 var app = builder.Build();
@@ -20,6 +19,12 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, "WordMorphBackend", "static")),
+    RequestPath = "/static"
+});
 
 app.UseRouting();
 

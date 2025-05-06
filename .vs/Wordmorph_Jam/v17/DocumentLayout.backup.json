@@ -1,0 +1,98 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\humey\\source\\repos\\Jam_AI_Project\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8C6FE560-630C-448D-BED6-7662330F0C17}|Wordmorph_Jam\\Wordmorph_Jam.csproj|c:\\users\\humey\\source\\repos\\jam_ai_project\\wordmorph_jam\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C6FE560-630C-448D-BED6-7662330F0C17}|Wordmorph_Jam\\Wordmorph_Jam.csproj|solutionrelative:wordmorph_jam\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C6FE560-630C-448D-BED6-7662330F0C17}|Wordmorph_Jam\\Wordmorph_Jam.csproj|c:\\users\\humey\\source\\repos\\jam_ai_project\\wordmorph_jam\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8C6FE560-630C-448D-BED6-7662330F0C17}|Wordmorph_Jam\\Wordmorph_Jam.csproj|solutionrelative:wordmorph_jam\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 58,
+          "SelectedChildIndex": 11,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:515856850:0:{bf84ea66-d821-4dba-b1b1-2777d8574775}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:749286421:0:{bf84ea66-d821-4dba-b1b1-2777d8574775}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1198987249:0:{bf84ea66-d821-4dba-b1b1-2777d8574775}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1203772354:0:{bf84ea66-d821-4dba-b1b1-2777d8574775}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:380270340:0:{bf84ea66-d821-4dba-b1b1-2777d8574775}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{fabf9319-47eb-497e-b8f6-d9f73fba5f55}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:6:0:{fabf9319-47eb-497e-b8f6-d9f73fba5f55}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:4:0:{fabf9319-47eb-497e-b8f6-d9f73fba5f55}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:5:0:{fabf9319-47eb-497e-b8f6-d9f73fba5f55}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{fabf9319-47eb-497e-b8f6-d9f73fba5f55}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:3:0:{fabf9319-47eb-497e-b8f6-d9f73fba5f55}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\humey\\source\\repos\\Jam_AI_Project\\Wordmorph_Jam\\Pages\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "Wordmorph_Jam\\Pages\\Index.cshtml.cs",
+              "ToolTip": "C:\\Users\\humey\\source\\repos\\Jam_AI_Project\\Wordmorph_Jam\\Pages\\Index.cshtml.cs",
+              "RelativeToolTip": "Wordmorph_Jam\\Pages\\Index.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T10:44:19.117Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\humey\\source\\repos\\Jam_AI_Project\\Wordmorph_Jam\\Pages\\Index.cshtml",
+              "RelativeDocumentMoniker": "Wordmorph_Jam\\Pages\\Index.cshtml",
+              "ToolTip": "C:\\Users\\humey\\source\\repos\\Jam_AI_Project\\Wordmorph_Jam\\Pages\\Index.cshtml",
+              "RelativeToolTip": "Wordmorph_Jam\\Pages\\Index.cshtml",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABwAAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-06T10:37:37.738Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

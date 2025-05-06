@@ -5,10 +5,8 @@ import requests
 
 
 load_dotenv()
-UNSPLASH_KEY = os.getenv("UNSPLASH_API_KEY")
+UNSPLASH_KEY = os.getenv("UNSPLASH_KEY")
 
-
-# Görsel alma fonksiyonu (Unsplash API ile)
 def get_image_url(keyword: str) -> str:
     try:
         response = requests.get(

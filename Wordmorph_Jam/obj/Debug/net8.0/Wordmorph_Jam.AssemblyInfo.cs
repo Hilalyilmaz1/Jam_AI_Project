@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Wordmorph_Jam")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+83465bcf05b37c4512ffec989f611448803135e8")]
 [assembly: System.Reflection.AssemblyProductAttribute("Wordmorph_Jam")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Wordmorph_Jam")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

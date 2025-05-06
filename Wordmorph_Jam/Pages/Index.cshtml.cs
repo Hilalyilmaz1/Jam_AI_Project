@@ -1,25 +1,21 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc;
-using Wordmorph_Jam.Services;
 using System.Threading.Tasks;
 using System.Text;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace Wordmorph_Jam.Pages
 {
     public class IndexModel : PageModel
-    {
-        private readonly GeminiService _geminiService;
-
-        public IndexModel(GeminiService geminiService)
-        {
-            _geminiService = geminiService;
-        }
+    { 
 
         [BindProperty]
         public string UserInputText { get; set; }
-
-        [BindProperty]
-        public string ProcessedText { get; set; }
+        public string ColoredSimplifiedText { get; set; }
+        public string SimplifiedText { get; set; }
+        public string ImageUrl { get; set; }
+        public string AudioUrl { get; set; }      
 
         public void OnGet()
         {
@@ -28,11 +24,46 @@ namespace Wordmorph_Jam.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!string.IsNullOrWhiteSpace(UserInputText))
+            if (string.IsNullOrWhiteSpace(UserInputText))
+                return Page();
+
+            using var client = new HttpClient();
+
+            var jsonContent = new StringContent(
+                JsonConvert.SerializeObject(new { text = UserInputText }),
+                Encoding.UTF8, "application/json");
+
+            // 1. Metni sadeleþtir
+            var simplifyResponse = await client.PostAsync("http://localhost:8000/simplify", jsonContent);
+            if (!simplifyResponse.IsSuccessStatusCode)
+                return Page();
+
+            var simplifyResult = JsonConvert.DeserializeObject<dynamic>(await simplifyResponse.Content.ReadAsStringAsync());
+            SimplifiedText = simplifyResult.simplified_text;
+
+            // 2. Renklendir ve ayýr
+            ColoredSimplifiedText = RenklendirVeAyir(SimplifiedText);
+
+            // 3. Görseli sadeleþtirilmiþ metne göre al
+            var simplifiedJson = new StringContent(
+                JsonConvert.SerializeObject(new { text = SimplifiedText }),
+                Encoding.UTF8, "application/json");
+
+            var imageResponse = await client.PostAsync("http://localhost:8000/generate-image", simplifiedJson);
+            if (imageResponse.IsSuccessStatusCode)
             {
-                ProcessedText = await _geminiService.SimplifyTextAsync(UserInputText);
-                ProcessedText = RenklendirVeAyir(ProcessedText);
+                var imageResult = JsonConvert.DeserializeObject<dynamic>(await imageResponse.Content.ReadAsStringAsync());
+                ImageUrl = imageResult.image_url;
             }
+
+            // 4. TTS - sadeleþtirilmiþ metni sesli oku
+            var ttsResponse = await client.PostAsync("http://localhost:8000/tts", simplifiedJson);
+            if (ttsResponse.IsSuccessStatusCode)
+            {
+                var ttsResult = JsonConvert.DeserializeObject<dynamic>(await ttsResponse.Content.ReadAsStringAsync());
+                AudioUrl = ttsResult.audio_url;
+            }
+
             return Page();
         }
 
@@ -59,7 +90,6 @@ namespace Wordmorph_Jam.Pages
                 }
             }
 
-            // Kalan varsa ekle
             if (parca.Length > 0)
             {
                 var renk = renkler[renkIndex % renkler.Length];
